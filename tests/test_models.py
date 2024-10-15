@@ -1,6 +1,5 @@
 """Tests for statistics functions within the Model layer."""
 
-import os
 import numpy as np
 import numpy.testing as npt
 import pytest
@@ -36,9 +35,11 @@ def test_daily_mean_integers():
     ([0, 0, 0], 0.0),
     ([1.0, 1.0, 1.0], 0),
     ([0.0, 2.0], 1.0),
-    ([-1,0,1],0)
+    ([-1,0,1],0),
+    (np.array(1,2,3),2)
 ])
 def test_daily_standard_deviation(data, expected_standard_deviation):
+    """Test standard deviation function works for an array of  integers."""
     from inflammation.models import daily_standard_deviation
     result_data = daily_standard_deviation(data)['standard deviation']
     npt.assert_approx_equal(result_data, expected_standard_deviation)
